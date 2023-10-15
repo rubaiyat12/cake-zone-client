@@ -1,12 +1,45 @@
+import { useContext } from "react";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../providers/AuthProvider";
+import { FaShoppingCart } from 'react-icons/fa';
 
 
 const Navbar = () => {
+
+  const {user, logOut} = useContext(AuthContext);
+  const handleLogOut = () =>{
+    logOut()
+    .then(()=>{})
+    .catch(error=> console.log(error));
+
+  }
+
+  
+
     const navOptions = <>
      <ul className="menu menu-horizontal px-1">
       <li><Link to="/menu">Our Item</Link></li>
       <li><Link to="/">Home</Link></li>
-      <li><Link to="/order/salad">Order</Link></li>
+      
+      <li><Link to="/order/Chocolate">Order</Link></li>
+      <li><Link to="/secret">Secret</Link></li>
+      <li>
+        <Link to="/">
+        <button>
+  <FaShoppingCart></FaShoppingCart>
+  <div className="badge badge-secondary">+99</div>
+</button>
+        </Link>
+      </li>
+      
+      {
+        user ? <>
+        <button onClick={handleLogOut} className=" btn-ghost">LogOut</button>
+        </> : <>
+        <li><Link to="/login">Login</Link></li>
+
+        </>
+      }
       
     </ul>
     </>
