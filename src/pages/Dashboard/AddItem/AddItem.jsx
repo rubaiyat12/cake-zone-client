@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
 
-import { AuthContext } from '../../providers/AuthProvider';
+import { AuthContext } from '../../../providers/AuthProvider';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Swal from 'sweetalert2'
-import SocialLogin from '../Shared/SocialLogin';
+import SocialLogin from '../../Shared/SocialLogin';
 
 const Login = () => {
-    
+    const [disabled, setDisabled] = useState(true);
     const { signIn } = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
@@ -43,7 +43,7 @@ const Login = () => {
 
     return (
         <>
-            
+           
             <div className="hero min-h-screen bg-base-200">
                 <div className="hero-content flex-col md:flex-row-reverse">
                     <div className="text-center md:w-1/2 lg:text-left">
@@ -70,7 +70,7 @@ const Login = () => {
                            
                             {/* TODO: make button disabled for captcha */}
                             <div className="form-control mt-6">
-                                <input  className="btn btn-primary" type="submit" value="Login" />
+                                <input disabled={false} className="btn btn-primary" type="submit" value="Login" />
                             </div>
                         </form>
                         <p><small>New Here? <Link to="/signup">Create an account</Link> </small></p>
